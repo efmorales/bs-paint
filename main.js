@@ -15,12 +15,12 @@
  * To make the second one happen, the number to change
  * is the first argument to `repeat`, currently set at 10.
  */
-const gridWidth = 10;
+const gridWidth = 50;
 let count = 0;
 while (count <= gridWidth * gridWidth) {
   const canvas = document.querySelector('.canvas');
   const div = document.createElement('div');
-  div.className = 'square color-5';
+  div.className = 'square color-8';
   canvas.appendChild(div);
   count++;
 }
@@ -49,7 +49,84 @@ while (count <= gridWidth * gridWidth) {
 // Add queries for all your squares, palette colors, and brush here.
 // (Note the singular or plural used in that sentence!)
 
+let brushBackground = document.querySelector(".current-brush");
+let colorsButton = document.querySelectorAll(".palette div");
 
+let greatCanvas = document.querySelector(".canvas");
+let millionCanvas = document.querySelectorAll(".canvas div");
+
+let app = document.querySelector(".app");
+
+let isMouseDown = false;
+
+
+for (let i = 0; i < colorsButton.length; i++) {
+  
+  colorsButton[i].addEventListener("click", function(){
+
+    brushBackground.classList.replace(`${brushBackground.classList[1]}`,`${colorsButton[i].classList[1]}`);
+
+  })
+  
+}
+
+console.log(millionCanvas[1].classList[1])
+
+//mousedown checks if user icks and holds
+//mouseup checks for when releases and holds
+
+for (let i = 0; i < millionCanvas.length; i++) {
+
+  millionCanvas[i].addEventListener('click', function(){
+
+    isMouseDown = false;
+
+    millionCanvas[i].classList.replace(`${millionCanvas[i].classList[1]}`, `${brushBackground.classList[1]}`)
+  })
+      
+  
+
+  millionCanvas[i].addEventListener('mouseover', function(){
+
+    if (isMouseDown === true){
+
+      millionCanvas[i].classList.replace(`${millionCanvas[i].classList[1]}`, `${brushBackground.classList[1]}`)
+    }
+      
+    })
+  
+}
+
+app.addEventListener("mousedown", function(){
+
+  if( isMouseDown === false){
+    isMouseDown = true;
+  }
+
+  
+  console.log("Mouse is down " + isMouseDown)
+    
+  })
+
+app.addEventListener("mouseup", function(){
+  isMouseDown = false;
+    
+  console.log("Mouse is up " + isMouseDown)
+
+})
+
+// if (brushBackground.classList[1] === `color-${i+1}`){
+
+  // brushBackground.classList.replace(`${colorsButton[i].classList[1]}`, `color-${i+1}`);
+  
+// }
+
+// console.log(millionCanvas);
+// console.log(colorsButton);
+// console.log(redColor.classList[1]);
+// console.log(brushBackground.classList[1]);
+// console.log(colorsButton[0].classList[1]);
+//colorsButton[i].classList[1];
 
 /****************************
  * EVENT LISTENER FUNCTIONS *
